@@ -6,6 +6,7 @@ import SignUp from "./signup";
 import "./App.css";
 import { AuthProvider } from "./contexts/AuthContext";
 import ResponsiveAppBar from "./components";
+import Upload from "./upload";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signin" exact component={SignIn} />
         <Route path="/signup" exact component={SignUp} />
         <Route path="/" exact component={Bar} />
+        <Route path="/upload" component={Upload} />
 
         {/* <PrivateRoute path="/time" exact component={Time} /> */}
         {/* <Footer/>  */}
