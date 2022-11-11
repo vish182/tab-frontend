@@ -34,6 +34,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PrivateRoute from "./auth/private_route";
 import LoggedInRouteRoute from "./auth/loggedIn_route";
+import MyTabs from "./mytabs";
 
 const drawerWidth = 240;
 
@@ -198,9 +199,9 @@ const App = () => {
             <ListItem key="My Tabs" disablePadding>
               <ListItemButton
                 onClick={async () => {
-                  await logout();
+                  //await logout();
                   // handleCloseUserMenu();
-                  history.push("/signin");
+                  history.push("/mytabs");
                 }}
               >
                 <ListItemIcon>
@@ -251,6 +252,7 @@ const App = () => {
         <Route path="/sampletabs" exact component={Bar} />
         <Route path="/" exact component={Upload} />
         <PrivateRoute path="/upload" component={Upload} />
+        <PrivateRoute path="/mytabs" component={MyTabs} />
         {/* <Route path="scrap" component={PersistentDrawerLeft} /> */}
 
         {/* <PrivateRoute path="/time" exact component={Time} /> */}

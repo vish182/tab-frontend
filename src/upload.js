@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { orange, purple, green, grey } from "@mui/material/colors";
 import { useAuth } from "./contexts/AuthContext";
+import { createTab } from "./api/upload";
 
 const theme = createTheme({
   palette: {
@@ -75,7 +76,21 @@ function Upload() {
 
           getNotes({ download_url: url }).then((transcribed_notes) => {
             console.log(transcribed_notes);
-            setNotes(transcribed_notes);
+
+            let new_notes = [];
+
+            transcribed_notes.map((data, index) => {
+              new_notes.push(parseNote(String(data)));
+            });
+
+            console.log(new_notes);
+
+            setNotes(new_notes);
+            createTab({
+              UID: currentUser.email,
+              filename: file.name.replace(/ /g, "_"),
+              tabs: new_notes,
+            });
           });
           // tell flask image is uploaded
 
@@ -115,9 +130,7 @@ function Upload() {
             </Box>
           </Box>
           <Box className="upload-output">
-            {notes.map((data, index) =>
-              notetile({ note: parseNote(String(data)) })
-            )}
+            {notes.map((data, index) => notetile({ note: data }))}
           </Box>
         </Box>
       </Box>
