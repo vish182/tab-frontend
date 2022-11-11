@@ -14,6 +14,35 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "./contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import "./styles/components.css";
+
+const noteColours = {
+  rest: "rgb(77, 68, 77)",
+  A: "rgb(223, 124, 223)",
+  "A#": "rgb(232, 99, 232)",
+  B: "rgb(207, 85, 207)",
+  C: "rgb(169, 55, 169)",
+  "C#": "rgb(203, 45, 203)",
+  D: "rgb(215, 33, 215)",
+  "D#": "rgb(201, 12, 201)",
+  E: "rgb(173, 10, 173)",
+  F: "rgb(147, 12, 147)",
+  "F#": "rgb(116, 7, 116)",
+  G: "rgb(96, 8, 96)",
+  "G#": "rgb(77, 9, 77)",
+};
+
+export const notetile = ({ note }) => {
+  console.log(note, "---", noteColours[note]);
+  return (
+    <div
+      className="notetile-parent"
+      style={{ backgroundColor: noteColours[note] }}
+    >
+      <p className="note-text">{note}</p>
+    </div>
+  );
+};
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard"];

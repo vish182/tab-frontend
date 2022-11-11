@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "./contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { orange, purple, green, grey } from "@mui/material/colors";
 
 function Copyright(props) {
   return (
@@ -33,7 +34,17 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    mode: "light",
+    primary: {
+      main: purple[300],
+    },
+    secondary: {
+      main: grey[500],
+    },
+  },
+});
 
 export default function SignIn() {
   const { login } = useAuth();
@@ -59,7 +70,7 @@ export default function SignIn() {
       }
       alert("login ok");
 
-      history.push("/");
+      history.push("/upload");
     } catch (err) {
       alert(`Failed to log in: ${err}`);
     }

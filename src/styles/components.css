@@ -1,0 +1,14 @@
+.notetile-parent {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: fit-content;
+  width: 20%;
+  background-color: aqua;
+}
+
+.note-text {
+  height: fit-content;
+  font-size: small;
+}

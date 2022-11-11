@@ -12,7 +12,7 @@ function LoggedInRouteRoute({ component: Component, ...rest }) {
         currentUser ? (
           <Redirect
             to={{
-              pathname: "/",
+              pathname: "/upload",
               state: { from: props.location },
             }}
           />

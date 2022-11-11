@@ -2,9 +2,33 @@ import { useState } from "react";
 import { firebase_storage } from "./auth/firebase_storage";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getNotes } from "./api/upload";
+import Button from "@mui/material/Button";
+import Input from "@mui/material/Input";
+import "./styles/upload.css";
+import LinearProgress from "@mui/material/LinearProgress";
+import Box from "@mui/material/Box";
+import { notetile } from "./components";
+import { parseNote } from "./utils/utils";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { orange, purple, green, grey } from "@mui/material/colors";
+import { useAuth } from "./contexts/AuthContext";
+
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: grey[500],
+    },
+  },
+});
 
 function Upload() {
   // State to store uploaded file
+  const { currentUser } = useAuth();
   const [file, setFile] = useState("");
 
   const [notes, setNotes] = useState([]);
@@ -19,10 +43,13 @@ function Upload() {
 
   const handleUpload = () => {
     if (!file) {
-      alert("Please upload an image first!");
+      alert("Please select a file first!");
     }
 
-    const storageRef = ref(firebase_storage, `/files/${file.name}`);
+    const storageRef = ref(
+      firebase_storage,
+      `/files/${currentUser.email}/${file.name}`
+    );
 
     // progress can be paused and resumed. It also exposes progress updates.
     // Receives the storage reference and the file to upload.
@@ -59,12 +86,42 @@ function Upload() {
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleChange} accept="/image/*" />
-      <button onClick={handleUpload}>Upload to Firebase</button>
-      <p>{percent} "% done"</p>
-      <div>{JSON.stringify(notes)}</div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Box className="upload-parent">
+        <Box className="upload-main">
+          <Box className="upload-banner">
+            <h1>Upload Your Files and get Playin'</h1>
+            <p>
+              {" "}
+              A dictionary can be created using two methods. The Object Literal
+              method or by using the new keyword. However, we focus on the
+              former. This is because it is very likely that you have used
+              dictionaries before and this method follows a familiar syntax.{" "}
+            </p>
+          </Box>
+          <Box className="upload-interactive">
+            <Button variant="outlined">
+              <Input type="file" onChange={handleChange} accept="/image/*" />
+            </Button>
+
+            {/* <button onClick={handleUpload}>Upload to Firebase</button> */}
+            <Button onClick={handleUpload} variant="contained">
+              Upload
+            </Button>
+          </Box>
+          <Box className="upload-percent">
+            <Box sx={{ width: "100%" }}>
+              <LinearProgress variant="determinate" value={percent} />
+            </Box>
+          </Box>
+          <Box className="upload-output">
+            {notes.map((data, index) =>
+              notetile({ note: parseNote(String(data)) })
+            )}
+          </Box>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
 
