@@ -25,6 +25,21 @@
 
 .invisible {
   color: white;
+  margin: 0px 15px 0x 15px;
+}
+
+.col {
+  margin: 0px 15px 0x 15px;
+}
+
+.alive {
+  background-color: grey;
+  margin: 0px 15px 0x 15px;
+}
+
+.dormant {
+  /* background-color: grey; */
+  margin: 0px 15px 0x 15px;
 }
 
 .bar {

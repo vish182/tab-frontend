@@ -106,12 +106,11 @@ function Upload() {
         <Box className="upload-main">
           <Box className="upload-banner">
             <h1>Upload Your Files and get Playin'</h1>
-            <p>
+            <p style={{ width: "100%" }}>
               {" "}
-              A dictionary can be created using two methods. The Object Literal
-              method or by using the new keyword. However, we focus on the
-              former. This is because it is very likely that you have used
-              dictionaries before and this method follows a familiar syntax.{" "}
+              Upload your .wav files by clicking the button below and your tabs
+              will be ready in n ot time. The notes are wil be displayed in
+              order, starting from the top. More features coming soon{" "}
             </p>
           </Box>
           <Box className="upload-interactive">

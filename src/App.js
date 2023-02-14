@@ -211,6 +211,20 @@ const App = () => {
               </ListItemButton>
             </ListItem>
           )}
+          <ListItem key="Sample Tabs" disablePadding>
+            <ListItemButton
+              onClick={async () => {
+                //await logout();
+                // handleCloseUserMenu();
+                history.push("/sampletabs");
+              }}
+            >
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sample Tabs" />
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
         <List>
