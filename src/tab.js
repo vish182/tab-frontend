@@ -42,6 +42,7 @@ import G5 from "./assets/G5.wav";
 import Gs5 from "./assets/G#5.wav";
 import A5 from "./assets/A5.wav";
 import As5 from "./assets/A#5.wav";
+import { useRef } from "react";
 // import B5 from "./assets/B5.wav";
 // import C5 from "./assets/C5.wav";
 // import Cs5 from "./assets/C#5.wav";
@@ -212,6 +213,7 @@ const tuning = () => {
 };
 
 export const Bar = () => {
+  
   const [cols, setCols] = useState([
     { d: 12 },
     { b: 15 },
@@ -281,8 +283,20 @@ export const Bar = () => {
   ]);
 
   const [liveCol, setLiveCol] = useState(0);
+  const paused = useRef(0);
+
+  // const getPausedVal = () => {
+  //   return paused;
+  // }
 
   const makeLive = (i) => {
+    let date = new Date();
+    //let isPaused = getPausedVal();
+    console.log("playing: ", i, "  Paused: ", paused.current, "  timestamp: ", (date.getSeconds()));
+    if(i === cols.length || paused.current === 1){
+      return;
+    }
+
     setLiveCol(i);
 
     if (cols[i].e0) {
@@ -300,30 +314,56 @@ export const Bar = () => {
       //console.log(note_map.e1[cols[i].e1]);
       new Audio(note_map.e1[cols[i].e1]).play();
     }
-
+    setTimeout(makeLive,500, i+1);
     //new Audio(note).play();
   };
 
   const playTabs = () => {
+    paused.current = 0;
     let len = cols.length;
     console.log(len);
 
-    for (let i = 0; i < len; i++) {
-      setTimeout(makeLive, (i + 1) * 500, i);
-    }
+    //for (let i = 0; i < len; i++) {
+    setTimeout(makeLive, 500, liveCol);
+    //}
   };
 
+  const pauseTabs = () => {
+    console.log("Pause");
+    paused.current = 1;
+    console.log(paused);
+  };
+
+  const rewind = () => {
+    paused.current = 1;
+    if(liveCol > 0){
+      setLiveCol(liveCol-1);
+    }
+  }
+
+  const forward = () => {
+    paused.current = 1;
+    if(liveCol < cols.length){
+      setLiveCol(liveCol+1);
+    }
+  }
+
   return (
-    <>
-      <div>
-        <button onClick={playTabs}>play</button>
+    <div className="tab-player-parent">
+      <div className="tab-player-group">
+        <div className="player-btns">
+          <button style={{fontSize: "24px"}} onClick={rewind}><i className="fa fa-step-backward"></i></button>
+          <button className="payer-btn" onClick={playTabs}>play</button>
+          <button className="payer-btn" onClick={pauseTabs}>pause</button>
+          <button style={{fontSize: "24px"}} onClick={forward}><i className="fa fa-step-forward"></i></button>
+        </div>
+        <div className="bar">
+          {tuning()}
+          {cols.map((column, i) =>
+            col(column, i == liveCol ? "alive" : "dormant")
+          )}
+        </div>
       </div>
-      <div className="bar">
-        {tuning()}
-        {cols.map((column, i) =>
-          col(column, i == liveCol ? "alive" : "dormant")
-        )}
-      </div>
-    </>
+    </div>
   );
 };

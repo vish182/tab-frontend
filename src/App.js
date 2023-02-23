@@ -35,6 +35,8 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PrivateRoute from "./auth/private_route";
 import LoggedInRouteRoute from "./auth/loggedIn_route";
 import MyTabs from "./mytabs";
+import PersonIcon from '@mui/icons-material/Person';
+import HomeIcon from '@mui/icons-material/Home';
 
 const drawerWidth = 240;
 
@@ -189,9 +191,23 @@ const App = () => {
             <ListItem key="id" disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon />
+                  <PersonIcon/>
                 </ListItemIcon>
                 <ListItemText primary={currentUser.email} />
+              </ListItemButton>
+            </ListItem>
+          )}
+          {currentUser && (
+            <ListItem key="home" disablePadding>
+              <ListItemButton
+              onClick={async () => {
+                // handleCloseUserMenu();
+                history.push("/");
+              }}>
+                <ListItemIcon>
+                  <HomeIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Home" />
               </ListItemButton>
             </ListItem>
           )}
@@ -264,7 +280,7 @@ const App = () => {
         <LoggedInRouteRoute path="/signin" exact component={SignIn} />
         <LoggedInRouteRoute path="/signup" exact component={SignUp} />
         <Route path="/sampletabs" exact component={Bar} />
-        <Route path="/" exact component={Upload} />
+        <PrivateRoute path="/" exact component={Upload} />
         <PrivateRoute path="/upload" component={Upload} />
         <PrivateRoute path="/mytabs" component={MyTabs} />
         {/* <Route path="scrap" component={PersistentDrawerLeft} /> */}

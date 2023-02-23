@@ -14,6 +14,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { orange, purple, green, grey } from "@mui/material/colors";
 import { useAuth } from "./contexts/AuthContext";
 import { createTab } from "./api/upload";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const theme = createTheme({
   palette: {
@@ -33,6 +36,7 @@ function Upload() {
   const [file, setFile] = useState("");
 
   const [notes, setNotes] = useState([]);
+  const [isChord, setIsChord] = useState(0);
 
   // progress
   const [percent, setPercent] = useState(0);
@@ -74,7 +78,7 @@ function Upload() {
 
           //   let transcribed_notes;
 
-          getNotes({ download_url: url }).then((transcribed_notes) => {
+          getNotes({ download_url: url, isChord: isChord }).then((transcribed_notes) => {
             console.log(transcribed_notes);
 
             let new_notes = [];
@@ -100,6 +104,10 @@ function Upload() {
     );
   };
 
+  const handleDropChange = (e) => {
+    setIsChord(e.target.value);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Box className="upload-parent">
@@ -114,6 +122,16 @@ function Upload() {
             </p>
           </Box>
           <Box className="upload-interactive">
+              <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={isChord}
+              label="Track"
+              onChange={handleDropChange}
+            >
+                <MenuItem value={0}>Tabs</MenuItem>
+                <MenuItem value={1}>Chords</MenuItem>
+            </Select>
             <Button variant="outlined">
               <Input type="file" onChange={handleChange} accept="/image/*" />
             </Button>
