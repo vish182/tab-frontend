@@ -33,11 +33,11 @@ const noteColours = {
 };
 
 export const notetile = ({ note }) => {
-  console.log(note, "---", noteColours[note]);
+  //console.log(note, "---", noteColours[note]);
   return (
     <div
       className="notetile-parent"
-      style={{ backgroundColor: noteColours[note] }}
+      style={{ backgroundColor: noteColours[note] ? noteColours[note] : "rgb(77,9,77)"}}
     >
       <p className="note-text">{note}</p>
     </div>

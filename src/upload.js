@@ -17,6 +17,7 @@ import { createTab } from "./api/upload";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Bar } from "./tab";
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,74 @@ const theme = createTheme({
 });
 
 function Upload() {
+
+  const sample_tabs = [
+    { d: 12 },
+    { b: 15 },
+    { g: 14 },
+    { g: 12 },
+    { e1: 15 },
+    { g: 14 },
+    { e1: 14 },
+    { g: 14 },
+    { d: 12 },
+    { b: 15 },
+    { g: 14 },
+    { g: 12 },
+    { e1: 15 },
+    { g: 14 },
+    { e1: 14 },
+    { g: 14 },
+    { d: 14 },
+    { b: 15 },
+    { g: 14 },
+    { g: 12 },
+    { e1: 15 },
+    { g: 14 },
+    { e1: 14 },
+    { g: 14 },
+    { d: 14 },
+    { b: 15 },
+    { g: 14 },
+    { g: 12 },
+    { e1: 15 },
+    { g: 14 },
+    { e1: 14 },
+    { g: 14 },
+
+    { g: 12 },
+    { b: 15 },
+    { g: 14 },
+    { g: 12 },
+    { e1: 15 },
+    { g: 14 },
+    { e1: 14 },
+    { g: 14 },
+    { g: 12 },
+    { b: 15 },
+    { g: 14 },
+    { g: 12 },
+    { e1: 15 },
+    { g: 14 },
+    { e1: 14 },
+    { g: 14 },
+
+    { e1: 12 },
+    { g: 12 },
+    { b: 15 },
+    { g: 12 },
+    { e1: 12 },
+    { g: 12 },
+    { e1: 14 },
+    { g: 12 },
+    { e1: 15 },
+    { g: 12 },
+    { e1: 14 },
+    { g: 12 },
+    { e1: 12 },
+    { g: 12 },
+    { b: 14 },
+  ];
   // State to store uploaded file
   const { currentUser } = useAuth();
   const [file, setFile] = useState("");
@@ -41,6 +110,10 @@ function Upload() {
   // progress
   const [percent, setPercent] = useState(0);
 
+  const [tabs, getTabs] = useState([]);
+
+  const [loading, setLoading] = useState("not_loading"); // "loading" , "loaded"
+
   // Handle file upload event and update state
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -50,7 +123,7 @@ function Upload() {
     if (!file) {
       alert("Please select a file first!");
     }
-
+    setLoading("loading")
     const storageRef = ref(
       firebase_storage,
       `/files/${currentUser.email}/${file.name}`
@@ -73,6 +146,7 @@ function Upload() {
       (err) => console.log(err),
       () => {
         // download url
+
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           console.log(url);
 
@@ -83,13 +157,19 @@ function Upload() {
 
             let new_notes = [];
 
-            transcribed_notes.map((data, index) => {
-              new_notes.push(parseNote(String(data)));
-            });
+            // transcribed_notes.map((data, index) => {
+            //   new_notes.push(parseNote(String(data)));
+            // });
 
-            console.log(new_notes);
+            for(let i=0; i < transcribed_notes.length; i++){
+              new_notes.push(JSON.parse(transcribed_notes[i]))
+            }
+
+            console.log("new notes: ", new_notes);
 
             setNotes(new_notes);
+            setLoading("loaded")
+            //console.log(new_notes)
             createTab({
               UID: currentUser.email,
               filename: file.name.replace(/ /g, "_"),
@@ -102,6 +182,7 @@ function Upload() {
         });
       }
     );
+    
   };
 
   const handleDropChange = (e) => {
@@ -146,9 +227,11 @@ function Upload() {
               <LinearProgress variant="determinate" value={percent} />
             </Box>
           </Box>
-          <Box className="upload-output">
-            {notes.map((data, index) => notetile({ note: data }))}
-          </Box>
+          {loading=="loading" && <h2>Loading ..</h2>}
+          {loading=="loaded" && <Bar tabs={notes}/>}
+          {/* <Box className="upload-output">
+            {notes.map((data, index) => notetile({ note: JSON.stringify(data) }))}
+          </Box> */}
         </Box>
       </Box>
     </ThemeProvider>

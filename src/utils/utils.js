@@ -8,8 +8,10 @@
 // };
 
 export const parseNote = (str) => {
-  const spaceind = str.indexOf(" ");
-  const rightArrow = str.indexOf(">");
+  //const spaceind = str.indexOf(" ");
+  //onst rightArrow = str.indexOf(">");
 
-  return str.slice(spaceind + 1, rightArrow);
+  //return str.slice(spaceind + 1, rightArrow);
+
+  return str;
 };

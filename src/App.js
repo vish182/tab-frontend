@@ -37,6 +37,7 @@ import LoggedInRouteRoute from "./auth/loggedIn_route";
 import MyTabs from "./mytabs";
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
+import Forgot from "./forgot_password"
 
 const drawerWidth = 240;
 
@@ -280,6 +281,7 @@ const App = () => {
         <LoggedInRouteRoute path="/signin" exact component={SignIn} />
         <LoggedInRouteRoute path="/signup" exact component={SignUp} />
         <Route path="/sampletabs" exact component={Bar} />
+        <Route path="/forgotpassword" exact component={Forgot} />
         <PrivateRoute path="/" exact component={Upload} />
         <PrivateRoute path="/upload" component={Upload} />
         <PrivateRoute path="/mytabs" component={MyTabs} />

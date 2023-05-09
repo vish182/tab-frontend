@@ -1,47 +1,48 @@
 import React, { useEffect, useState } from "react";
 import note from "./assets/note.mp3";
+import E2 from "./assets/E2.wav";
 import F2 from "./assets/F2.wav";
-import Fs2 from "./assets/F#2.wav";
+import Fs2 from "./assets/Fsharp2.wav";
 import G2 from "./assets/G2.wav";
-import Gs2 from "./assets/G#2.wav";
+import Gs2 from "./assets/Gsharp2.wav";
 import A2 from "./assets/A2.wav";
-import As2 from "./assets/A#2.wav";
+import As2 from "./assets/Asharp2.wav";
 import B2 from "./assets/B2.wav";
-import C2 from "./assets/C2.wav";
-import Cs2 from "./assets/C#2.wav";
-import D2 from "./assets/D2.wav";
-import Ds2 from "./assets/D#2.wav";
+import C3 from "./assets/C3.wav";
+import Cs3 from "./assets/Csharp3.wav";
+import D3 from "./assets/D3.wav";
+import Ds3 from "./assets/Dsharp3.wav";
 import E3 from "./assets/E3.wav";
 import F3 from "./assets/F3.wav";
-import Fs3 from "./assets/F#3.wav";
+import Fs3 from "./assets/Fsharp3.wav";
 import G3 from "./assets/G3.wav";
-import Gs3 from "./assets/G#3.wav";
+import Gs3 from "./assets/Gsharp3.wav";
 import A3 from "./assets/A3.wav";
-import As3 from "./assets/A#3.wav";
+import As3 from "./assets/Asharp3.wav";
 import B3 from "./assets/B3.wav";
-import C3 from "./assets/C3.wav";
-import Cs3 from "./assets/C#3.wav";
-import D3 from "./assets/D3.wav";
-import Ds3 from "./assets/D#3.wav";
-import E4 from "./assets/E4.wav";
-import F4 from "./assets/F4.wav";
-import Fs4 from "./assets/F#4.wav";
-import G4 from "./assets/G4.wav";
-import Gs4 from "./assets/G#4.wav";
-import A4 from "./assets/A4.wav";
-import As4 from "./assets/A#4.wav";
-import B4 from "./assets/B4.wav";
 import C4 from "./assets/C4.wav";
 import Cs4 from "./assets/Csharp4.wav";
 import D4 from "./assets/D4.wav";
-import Ds4 from "./assets/D#4.wav";
+import Ds4 from "./assets/Dsharp4.wav";
+import E4 from "./assets/E4.wav";
+import F4 from "./assets/F4.wav";
+import Fs4 from "./assets/Fsharp4.wav";
+import G4 from "./assets/G4.wav";
+import Gs4 from "./assets/Gsharp4.wav";
+import A4 from "./assets/A4.wav";
+import As4 from "./assets/Asharp4.wav";
+import B4 from "./assets/B4.wav";
+import C5 from "./assets/C5.wav";
+import Cs5 from "./assets/Csharp5.wav";
+import D5 from "./assets/D5.wav";
+import Ds5 from "./assets/Dsharp5.wav";
 import E5 from "./assets/E5.wav";
 import F5 from "./assets/F5.wav";
 import Fs5 from "./assets/Fsharp5.wav";
 import G5 from "./assets/G5.wav";
-import Gs5 from "./assets/G#5.wav";
+import Gs5 from "./assets/Gsharp5.wav";
 import A5 from "./assets/A5.wav";
-import As5 from "./assets/A#5.wav";
+import As5 from "./assets/Asharp5.wav";
 import { useRef } from "react";
 // import B5 from "./assets/B5.wav";
 // import C5 from "./assets/C5.wav";
@@ -59,10 +60,10 @@ const note_map = {
     A4,
     As4,
     B4,
-    C4,
-    Cs4,
-    D4,
-    Ds4,
+    C5,
+    Cs5,
+    D5,
+    Ds5,
     E5,
     F5,
     Fs5,
@@ -73,10 +74,10 @@ const note_map = {
   ],
   b: [
     B3,
-    C3,
-    Cs3,
-    D3,
-    Ds3,
+    C4,
+    Cs4,
+    D4,
+    Ds4,
     E4,
     F4,
     Fs4,
@@ -85,10 +86,10 @@ const note_map = {
     A4,
     As4,
     B4,
-    C4,
-    Cs4,
-    D4,
-    Ds4,
+    C5,
+    Cs5,
+    D5,
+    Ds5,
     E5,
     F5,
   ],
@@ -98,10 +99,10 @@ const note_map = {
     A3,
     As3,
     B3,
-    C3,
-    Cs3,
-    D3,
-    Ds3,
+    C4,
+    Cs4,
+    D4,
+    Ds4,
     E4,
     F4,
     Fs4,
@@ -110,12 +111,12 @@ const note_map = {
     A4,
     As4,
     B4,
-    C4,
-    Cs4,
+    C5,
+    Cs5,
   ],
   d: [
-    D2,
-    Ds2,
+    D3,
+    Ds3,
     E3,
     F3,
     Fs3,
@@ -124,10 +125,10 @@ const note_map = {
     A3,
     As3,
     B3,
-    C3,
-    Cs3,
-    D3,
-    Ds3,
+    C4,
+    Cs4,
+    D4,
+    Ds4,
     E4,
     F4,
     Fs4,
@@ -138,10 +139,10 @@ const note_map = {
     A2,
     As2,
     B2,
-    C2,
-    Cs2,
-    D2,
-    Ds2,
+    C3,
+    Cs3,
+    D3,
+    Ds3,
     E3,
     F3,
     Fs3,
@@ -150,13 +151,13 @@ const note_map = {
     A3,
     As3,
     B3,
-    C3,
-    Cs3,
-    D3,
-    Ds3,
+    C4,
+    Cs4,
+    D4,
+    Ds4,
   ],
   e0: [
-    E3,
+    E2,
     F2,
     Fs2,
     G2,
@@ -164,10 +165,10 @@ const note_map = {
     A2,
     As2,
     B2,
-    C2,
-    Cs2,
-    D2,
-    Ds2,
+    C3,
+    Cs3,
+    D3,
+    Ds3,
     E3,
     F3,
     Fs3,
@@ -212,75 +213,75 @@ const tuning = () => {
   );
 };
 
-export const Bar = () => {
-  
-  const [cols, setCols] = useState([
-    { d: 12 },
-    { b: 15 },
-    { g: 14 },
-    { g: 12 },
-    { e1: 15 },
-    { g: 14 },
-    { e1: 14 },
-    { g: 14 },
-    { d: 12 },
-    { b: 15 },
-    { g: 14 },
-    { g: 12 },
-    { e1: 15 },
-    { g: 14 },
-    { e1: 14 },
-    { g: 14 },
-    { d: 14 },
-    { b: 15 },
-    { g: 14 },
-    { g: 12 },
-    { e1: 15 },
-    { g: 14 },
-    { e1: 14 },
-    { g: 14 },
-    { d: 14 },
-    { b: 15 },
-    { g: 14 },
-    { g: 12 },
-    { e1: 15 },
-    { g: 14 },
-    { e1: 14 },
-    { g: 14 },
+export const Bar = (props) => {
+  const cols = props.tabs
+  // const [cols, setCols] = useState([
+  //   { d: 12 },
+  //   { b: 15 },
+  //   { g: 14 },
+  //   { g: 12 },
+  //   { e1: 15 },
+  //   { g: 14 },
+  //   { e1: 14 },
+  //   { g: 14 },
+  //   { d: 12 },
+  //   { b: 15 },
+  //   { g: 14 },
+  //   { g: 12 },
+  //   { e1: 15 },
+  //   { g: 14 },
+  //   { e1: 14 },
+  //   { g: 14 },
+  //   { d: 14 },
+  //   { b: 15 },
+  //   { g: 14 },
+  //   { g: 12 },
+  //   { e1: 15 },
+  //   { g: 14 },
+  //   { e1: 14 },
+  //   { g: 14 },
+  //   { d: 14 },
+  //   { b: 15 },
+  //   { g: 14 },
+  //   { g: 12 },
+  //   { e1: 15 },
+  //   { g: 14 },
+  //   { e1: 14 },
+  //   { g: 14 },
 
-    { g: 12 },
-    { b: 15 },
-    { g: 14 },
-    { g: 12 },
-    { e1: 15 },
-    { g: 14 },
-    { e1: 14 },
-    { g: 14 },
-    { g: 12 },
-    { b: 15 },
-    { g: 14 },
-    { g: 12 },
-    { e1: 15 },
-    { g: 14 },
-    { e1: 14 },
-    { g: 14 },
+  //   { g: 12 },
+  //   { b: 15 },
+  //   { g: 14 },
+  //   { g: 12 },
+  //   { e1: 15 },
+  //   { g: 14 },
+  //   { e1: 14 },
+  //   { g: 14 },
+  //   { g: 12 },
+  //   { b: 15 },
+  //   { g: 14 },
+  //   { g: 12 },
+  //   { e1: 15 },
+  //   { g: 14 },
+  //   { e1: 14 },
+  //   { g: 14 },
 
-    { e1: 12 },
-    { g: 12 },
-    { b: 15 },
-    { g: 12 },
-    { e1: 12 },
-    { g: 12 },
-    { e1: 14 },
-    { g: 12 },
-    { e1: 15 },
-    { g: 12 },
-    { e1: 14 },
-    { g: 12 },
-    { e1: 12 },
-    { g: 12 },
-    { b: 14 },
-  ]);
+  //   { e1: 12 },
+  //   { g: 12 },
+  //   { b: 15 },
+  //   { g: 12 },
+  //   { e1: 12 },
+  //   { g: 12 },
+  //   { e1: 14 },
+  //   { g: 12 },
+  //   { e1: 15 },
+  //   { g: 12 },
+  //   { e1: 14 },
+  //   { g: 12 },
+  //   { e1: 12 },
+  //   { g: 12 },
+  //   { b: 14 },
+  // ]);
 
   const [liveCol, setLiveCol] = useState(0);
   const paused = useRef(0);
