@@ -20,6 +20,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
+import { Bar } from "./tab";
 
 const theme = createTheme({
   palette: {
@@ -100,12 +101,14 @@ function MyTabs() {
                 ))}
             </List>
             <div>
-              <Box className="upload-output">
+              {/* <Box className="upload-output">
                 {activeTab != -1 &&
                   myTabsList[activeTab].tabs.map((data, index) =>
                     notetile({ note: data })
                   )}
-              </Box>
+              </Box> */}
+              <Box>{activeTab != -1 && <Bar tabs={myTabsList[activeTab].tabs}/>}</Box>
+              {/* JSON.stringify(myTabsList[activeTab].tabs) &&  */}
               {/* {JSON.stringify(myTabsList)} */}
             </div>
           </div>
