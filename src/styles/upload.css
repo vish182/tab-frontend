@@ -52,3 +52,16 @@
   text-align: justify;
   text-align-last: center;
 }
+
+.mytabs-parent{
+  display: flex;
+  flex-direction: row;
+}
+
+.mytabs-tabs{
+  flex: 3;
+}
+
+.mytabs-list{
+  flex: 1;
+}

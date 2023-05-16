@@ -87,20 +87,22 @@ function MyTabs() {
               dictionaries before and this method follows a familiar syntax.{" "}
             </p>
           </Box>
-          <div sx={{ width: "100%" }}>
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              {myTabsList.length != 0 &&
-                myTabsList.map((value) => (
-                  <ListItemButton onClick={handleActiveIndex(value.filename)}>
-                    <ListItem key={value.filename} disableGutters>
-                      <ListItemText primary={value.filename} />
-                    </ListItem>
-                  </ListItemButton>
-                ))}
-            </List>
-            <div>
+          <div className="mytabs-parent" sx={{ width: "100%" }}>
+            <div className="mytabs-list">
+              <List
+                sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+              >
+                {myTabsList.length != 0 &&
+                  myTabsList.map((value) => (
+                    <ListItemButton onClick={handleActiveIndex(value.filename)}>
+                      <ListItem key={value.filename} disableGutters>
+                        <ListItemText primary={value.filename} />
+                      </ListItem>
+                    </ListItemButton>
+                  ))}
+              </List>
+            </div>
+            <div className="mytabs-tabs">
               {/* <Box className="upload-output">
                 {activeTab != -1 &&
                   myTabsList[activeTab].tabs.map((data, index) =>

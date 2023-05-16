@@ -15,3 +15,9 @@ export const parseNote = (str) => {
 
   return str;
 };
+
+export const isInt = (value) => {
+  return !isNaN(value) && 
+         parseInt(Number(value)) == value && 
+         !isNaN(parseInt(value, 10));
+}

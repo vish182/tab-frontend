@@ -7,8 +7,9 @@ import Input from "@mui/material/Input";
 import "./styles/upload.css";
 import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import { notetile } from "./components";
-import { parseNote } from "./utils/utils";
+import { parseNote, isInt } from "./utils/utils";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { orange, purple, green, grey } from "@mui/material/colors";
@@ -114,14 +115,49 @@ function Upload() {
 
   const [loading, setLoading] = useState("not_loading"); // "loading" , "loaded"
 
+  const [start, setStart] = useState(1)
+  const [end, setEnd] = useState(10);
+
   // Handle file upload event and update state
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
 
+  function handleStart(event) {
+    console.log(event.target.value)
+    setStart(event.target.value);
+  }
+
+  function handleEnd(event) {
+    console.log(event.target.value)
+    setEnd(event.target.value);
+  }
+
   const handleUpload = () => {
+    console.log(start, end)
+    if(!start || !end){
+      alert("Select the start and end time for audio to transcribed")
+      return
+    }
+
+    if(!isInt(start) || !isInt(end)){
+      alert("start and end times must be numbers")
+      return
+    }
+
+    if(parseInt(Number(start)) >= parseInt(Number(end))){
+      alert("start time must be less than end time")
+      return
+    }
+
+    if(start < 0 || end < 0){
+      alert("insert valid timestamps")
+      return
+    }
+
     if (!file) {
       alert("Please select a file first!");
+      return
     }
     setLoading("loading")
     const storageRef = ref(
@@ -152,7 +188,7 @@ function Upload() {
 
           //   let transcribed_notes;
 
-          getNotes({ download_url: url, isChord: isChord }).then((transcribed_notes) => {
+          getNotes({ download_url: url, isChord: isChord, startTime: start, endTime: end }).then((transcribed_notes) => {
             console.log(transcribed_notes);
 
             let new_notes = [];
@@ -216,6 +252,8 @@ function Upload() {
             <Button variant="outlined">
               <Input type="file" onChange={handleChange} accept="/image/*" />
             </Button>
+            <TextField id="outlined-basic" label="Start    (sec)" variant="outlined" sx={{ m: 1, width: '10ch' }} onChange={handleStart} />
+            <TextField id="outlined-basic" label="End      (sec)" variant="outlined" sx={{ m: 1, width: '10ch' }} onChange={handleEnd}/>
 
             {/* <button onClick={handleUpload}>Upload to Firebase</button> */}
             <Button onClick={handleUpload} variant="contained">

@@ -1,7 +1,7 @@
 import { API } from "../config";
 import { firestoreInstance } from "../auth/firebase_auth";
 
-export const getNotes = ({ download_url, isChord }) => {
+export const getNotes = ({ download_url, isChord, startTime, endTime }) => {
   //console.log(user.name, user.email, user.password, user.phone);
 
   return fetch(`${API}/getnotes`, {
@@ -10,7 +10,7 @@ export const getNotes = ({ download_url, isChord }) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ download: String(download_url), chords: isChord }),
+    body: JSON.stringify({ download: String(download_url), chords: isChord, startTime: startTime, endTime: endTime }),
   })
     .then((response) => {
       //console.log(JSON.stringify(response.json()));

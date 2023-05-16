@@ -349,10 +349,16 @@ export const Bar = (props) => {
     }
   }
 
+  const restart = () => {
+    paused.current = 1;
+    setLiveCol(0)
+  }
+
   return (
     <div className="tab-player-parent">
       <div className="tab-player-group">
         <div className="player-btns">
+        <button style={{marginRight: "20px" ,fontSize: "24px"}} onClick={restart}><i className="fa fa fa-repeat"></i></button>
           <button style={{fontSize: "24px"}} onClick={rewind}><i className="fa fa-step-backward"></i></button>
           <button className="payer-btn" onClick={playTabs}>play</button>
           <button className="payer-btn" onClick={pauseTabs}>pause</button>
