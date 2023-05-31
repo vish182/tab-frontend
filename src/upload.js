@@ -150,6 +150,11 @@ function Upload() {
       return
     }
 
+    if((parseInt(Number(end))-parseInt(Number(start))) > 20 ){
+      alert("Clip is too long, must be shorter than 20 sec")
+      return
+    }
+
     if(start < 0 || end < 0){
       alert("insert valid timestamps")
       return
